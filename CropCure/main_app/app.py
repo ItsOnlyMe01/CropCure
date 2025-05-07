@@ -8,6 +8,8 @@ from flask import Flask, redirect, render_template, request
 from PIL import Image
 import torchvision.transforms.functional as TF
 
+
+
 # Try importing CNN module properly
 try:
     import CNN
