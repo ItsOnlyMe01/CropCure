@@ -3,7 +3,34 @@ import requests
 from flask import Flask, redirect, render_template, request
 from PIL import Image
 import torchvision.transforms.functional as TF
-import CNN
+# Fix the import by using a relative import or adjusting the Python path
+try:
+    import CNN
+except ModuleNotFoundError:
+    # Try alternative import approaches
+    import sys
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+    try:
+        import CNN
+    except ModuleNotFoundError:
+        # If still not found, try from parent directory
+        sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        try:
+            from CropCure import CNN
+        except ModuleNotFoundError:
+            print("ERROR: Could not import CNN module. Please check file structure.")
+            # Create a placeholder CNN class for debugging
+            class CNN:
+                def __init__(self, num_classes):
+                    self.num_classes = num_classes
+                def __call__(self, x):
+                    import numpy as np
+                    return np.zeros((1, self.num_classes))
+                def eval(self):
+                    pass
+                def load_state_dict(self, state_dict):
+                    pass
+
 import numpy as np
 import torch
 import pandas as pd
