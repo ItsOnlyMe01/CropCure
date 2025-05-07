@@ -1,0 +1,347 @@
+{% extends 'base.html' %} {% block pagetitle %} {{title}} {% endblock pagetitle
+%} {% block body %}
+<!-- Result Page Content -->
+<div class="results-container">
+  <div class="container py-4">
+    <!-- Title Section -->
+    <div class="row mb-4 text-center">
+      <div class="col-lg-10 mx-auto">
+        <h1 class="result-title">
+          <i class="fas fa-leaf text-success me-2"></i>
+          {{title}}
+          <i class="fas fa-leaf text-success ms-2"></i>
+        </h1>
+        <div class="title-underline"></div>
+      </div>
+    </div>
+
+    <!-- Image Section -->
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        <div class="plant-image-container">
+          <img
+            src="{{image_url}}"
+            alt="{{title}}"
+            class="img-fluid plant-image"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Cards Section -->
+    <div class="row g-4">
+      <!-- Description Card -->
+      <div class="col-lg-12">
+        <div class="info-card">
+          <h3 class="card-title">
+            <i class="fas fa-info-circle text-primary me-2"></i>
+            {% if pred==3 or pred==5 or pred==7 or pred==11 or pred==15 or
+            pred==18 or pred==20 or pred==23 or pred==24 or pred==25 or pred==28
+            or pred==38 %} Tips to Grow Healthy Plants {% else %} Brief
+            Description {% endif %}
+          </h3>
+          <div class="card-divider"></div>
+          <p class="card-text">{{desc}}</p>
+        </div>
+      </div>
+
+      <!-- Benefits/Prevention Card -->
+      <div class="col-lg-{% if pred!=4 %}6{% else %}12{% endif %}">
+        <div class="info-card">
+          <h3 class="card-title">
+            <i
+              class="{% if pred==3 or pred==5 or pred==7 or pred==11 or pred==15 or pred==18 or pred==20 or pred==23 or pred==24 or pred==25 or pred==28 or pred==38 %} fas fa-thumbs-up text-success {% else %} fas fa-shield-alt text-warning {% endif %} me-2"
+            ></i>
+            {% if pred==3 or pred==5 or pred==7 or pred==11 or pred==15 or
+            pred==18 or pred==20 or pred==23 or pred==24 or pred==25 or pred==28
+            or pred==38 %} Benefits {% else %} Prevent This Plant Disease {%
+            endif %}
+          </h3>
+          <div class="card-divider"></div>
+          <p class="card-text">{{prevent}}</p>
+        </div>
+      </div>
+
+      <!-- Supplements/Fertilizer Card -->
+      {% if pred!=4 %}
+      <div class="col-lg-6">
+        <div class="info-card text-center">
+          <h3 class="card-title">
+            <i
+              class="{% if pred==3 or pred==5 or pred==7 or pred==11 or pred==15 or pred==18 or pred==20 or pred==23 or pred==24 or pred==25 or pred==28 or pred==38 %} fas fa-seedling text-success {% else %} fas fa-prescription-bottle-alt text-info {% endif %} me-2"
+            ></i>
+            {% if pred==3 or pred==5 or pred==7 or pred==11 or pred==15 or
+            pred==18 or pred==20 or pred==23 or pred==24 or pred==25 or pred==28
+            or pred==38 %} Fertilizer {% else %} Supplements {% endif %}
+          </h3>
+          <div class="card-divider"></div>
+          <div class="product-image-container">
+            <img
+              src="{{simage}}"
+              alt="{{sname}}"
+              class="img-fluid product-image"
+            />
+          </div>
+          <h5 class="product-name mt-3">{{sname}}</h5>
+          <a target="_blank" href="{{buy_link}}" class="btn btn-buy mt-2">
+            <i class="fas fa-shopping-cart me-2"></i>Buy Product
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Back Button -->
+    <div class="row mt-4">
+      <div class="col-12 text-center">
+        <a href="/" class="btn btn-outline-success back-button">
+          <i class="fas fa-arrow-left me-2"></i>Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container text-center">
+    <p>© 2025 CropCure AI | Created by Ritesh</p>
+  </div>
+</footer>
+
+<!-- Custom CSS -->
+<style>
+  :root {
+    --primary-color: #2c6e49;
+    --secondary-color: #4c956c;
+    --accent-color: #fefee3;
+    --text-color: #233d4d;
+    --light-bg: #f8f9fa;
+  }
+
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: #f5f7f9;
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-brand {
+    font-weight: 700;
+    color: white !important;
+  }
+
+  .footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2rem 0;
+    margin-top: 3rem;
+  }
+
+  .footer p {
+    margin-bottom: 0;
+  }
+
+  /* Main styles */
+  .results-container {
+    background-color: #f8fff8;
+    padding: 20px 0 40px;
+    min-height: calc(100vh - 80px);
+  }
+
+  .result-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .title-underline {
+    height: 3px;
+    width: 100px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--secondary-color),
+      transparent
+    );
+    margin: 0 auto 20px;
+  }
+
+  /* Plant image */
+  .plant-image-container {
+    background-color: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .plant-image-container:hover {
+    transform: translateY(-5px);
+  }
+
+  .plant-image {
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  /* Info cards */
+  .info-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px;
+    height: 100%;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s;
+    border-left: 5px solid var(--secondary-color);
+  }
+
+  .info-card:hover {
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .card-divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--secondary-color), transparent);
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .card-text {
+    color: var(--text-color);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  /* Product section */
+  .product-image-container {
+    background-color: #f8fff8;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px auto;
+    max-width: 300px;
+  }
+
+  .product-image {
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  .product-name {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .btn-buy {
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: 600;
+    padding: 10px 25px;
+    border-radius: 50px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(76, 149, 108, 0.3);
+  }
+
+  .btn-buy:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(44, 110, 73, 0.4);
+  }
+
+  /* Back button */
+  .back-button {
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: all 0.3s;
+    margin-top: 20px;
+  }
+
+  .back-button:hover {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .result-title {
+      font-size: 2rem;
+    }
+
+    .info-card {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .result-title {
+      font-size: 1.8rem;
+    }
+
+    .plant-image-container {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .info-card {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .results-container {
+      padding: 10px 0 30px;
+    }
+
+    .result-title {
+      font-size: 1.5rem;
+    }
+
+    .info-card {
+      padding: 15px;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+    }
+
+    .card-text {
+      font-size: 1rem;
+    }
+
+    .product-image {
+      max-height: 250px;
+    }
+  }
+</style>
+{% endblock body %}

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CropCure AI</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #2c6e49;
+        --secondary-color: #4c956c;
+        --accent-color: #fefee3;
+        --text-color: #233d4d;
+        --light-bg: #f8f9fa;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color);
+        background-color: #f5f7f9;
+        overflow-x: hidden;
+      }
+
+      .navbar {
+        background-color: var(--primary-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        color: white !important;
+      }
+
+      .hero-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-title {
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero-subtitle {
+        font-weight: 400;
+        opacity: 0.9;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .plant-card {
+        background-color: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 30px;
+        height: 100%;
+      }
+
+      .plant-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .plant-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .plant-card-body {
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .plant-name {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 0;
+      }
+
+      .btn-engine {
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 2rem 0;
+      }
+
+      .btn-engine:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-engine i {
+        margin-right: 0.5rem;
+      }
+
+      .footer {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 2rem 0;
+        margin-top: 3rem;
+      }
+
+      .footer p {
+        margin-bottom: 0;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 991px) {
+        .hero-title {
+          font-size: 1.8rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+        }
+
+        .plant-card img {
+          height: 180px;
+        }
+
+        .btn-engine {
+          padding: 0.6rem 1.5rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero-section {
+          padding: 2rem 0;
+        }
+
+        .hero-title {
+          font-size: 1.5rem;
+        }
+
+        .plant-card {
+          margin-bottom: 20px;
+        }
+
+        .plant-card img {
+          height: 160px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-leaf"></i> CropCure AI
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section bg-green-50 py-16 desktop-only">
+      <div class="container mx-auto text-center px-4">
+        <h1
+          class="text-4xl md:text-5xl font-bold text-green-700 flex items-center justify-center gap-3"
+        >
+          <i class="fas fa-leaf text-green-500"></i>
+          CropCure AI
+          <i class="fas fa-leaf text-green-500"></i>
+        </h1>
+        <p
+          class="mt-2 text-xl text-emerald-700 font-medium italic tracking-wide"
+        >
+          Your farm’s personal doctor, powered by AI 🌿
+        </p>
+        <p class="text-xl text-gray-700 font-medium max-w-2xl mx-auto mt-4">
+          This AI engine will help detect diseases in your fruits and vegetables
+          — just upload an image and let intelligence do the rest.
+        </p>
+        <a
+          href="/index"
+          class="inline-block bg-yellow-500 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-full shadow-lg mt-6 transition duration-300"
+        >
+          <i class="fas fa-microchip mr-2"></i> Launch AI Engine
+        </a>
+      </div>
+    </div>
+
+    <!-- Plant Cards -->
+    <div class="container">
+      <div class="row">
+        <!-- First Row -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://post.healthline.com/wp-content/uploads/2020/09/Do_Apples_Affect_Diabetes_and_Blood_Sugar_Levels-732x549-thumbnail-1-732x549.jpg"
+              alt="Apple"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Apple</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://www.supermarketperimeter.com/ext/resources/0430-blueberries.png?t=1588260305&width=1080"
+              alt="Blueberry"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Blueberry</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/slideshows/health_benefits_of_cherries_slideshow/1800x1200_health_benefits_of_cherries_slideshow.jpg"
+              alt="Cherry"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Cherry</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://images.unsplash.com/photo-1634467524884-897d0af5e104?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Corn"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Corn</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second Row -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://i.ndtvimg.com/i/2015-09/grapes_625x350_61443376353.jpg"
+              alt="Grape"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Grape</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG9yYW5nZXxlbnwwfHwwfHx8MA%3D%3D"
+              alt="Orange"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Orange</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/the_health_benefits_of_peaches_slideshow/thinkstock_rf_peaches.jpg?resize=650px:*"
+              alt="Peach"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Peach</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://images.unsplash.com/photo-1572721794563-b799a41226ac?q=80&w=1950&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Pepper Bell"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Pepper Bell</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Third Row -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://m.economictimes.com/thumb/height-450,width-600,imgsize-111140,msid-72862126/potato-getty.jpg"
+              alt="Potato"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Potato</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/326/326272/raspberries-with-ketones-in-a-bowl.jpg?w=1155&h=1541"
+              alt="Raspberry"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Raspberry</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://m.economictimes.com/thumb/msid-66988154,width-1200,height-900,resizemode-4,imgsize-211276/soyabean-agencies.jpg"
+              alt="Soybean"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Soybean</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="plant-card">
+            <img
+              src="https://post.healthline.com/wp-content/uploads/2020/08/squash-fruit-or-vegetable-732x549-thumbnail-732x549.jpg"
+              alt="Squash"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Squash</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fourth Row (centered) -->
+        <div class="col-lg-3 col-md-6 mb-4 mx-auto">
+          <div class="plant-card">
+            <img
+              src="https://images.indianexpress.com/2020/02/strawberry-1200.jpg"
+              alt="Strawberry"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Strawberry</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4 mx-auto">
+          <div class="plant-card">
+            <img
+              src="https://images-prod.healthline.com/hlcmsresource/images/AN_images/tomatoes-1296x728-feature.jpg"
+              alt="Tomato"
+            />
+            <div class="plant-card-body">
+              <p class="plant-name">Tomato</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container text-center">
+        <p>© 2025 CropCure AI | Created by Ritesh</p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,276 @@
+{% extends 'base.html' %} {% block pagetitle %}Supplement Market{% endblock
+pagetitle %} {% block body %}
+<!-- Hero Section -->
+<div class="hero-section">
+  <div class="container text-center">
+    <h1 class="hero-title">
+      <i class="fas fa-shopping-cart"></i> Supplements Market
+      <i class="fas fa-leaf"></i>
+    </h1>
+    <p class="hero-subtitle">
+      High-quality supplements and fertilizers for your crops - all in one place
+    </p>
+  </div>
+</div>
+
+<!-- Products Section -->
+<div class="container">
+  <div class="row g-4">
+    {% for index in range(0,supplement_name | length) %} {% if index != 4 %}
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="supplement-card">
+        <div class="supplement-badge">
+          {% if index==3 or index==5 or index==7 or index==11 or index==15 or
+          index==18 or index==20 or index==23 or index==24 or index==25 or
+          index==28 or index==38 %}
+          <span class="badge-fertilizer"
+            ><i class="fas fa-seedling"></i> Fertilizer</span
+          >
+          {% else %}
+          <span class="badge-supplement"
+            ><i class="fas fa-pills"></i> Supplement</span
+          >
+          {% endif %}
+        </div>
+        <div class="supplement-img">
+          <img
+            src="{{supplement_image[index]}}"
+            alt="{{supplement_name[index]}}"
+            class="img-fluid"
+          />
+        </div>
+        <div class="supplement-info">
+          <div class="condition">
+            {% if index==3 or index==5 or index==7 or index==11 or index==15 or
+            index==18 or index==20 or index==23 or index==24 or index==25 or
+            index==28 or index==38 %}
+            <p>For <span class="healthy">Healthy Plants</span></p>
+            {% else %}
+            <p>For <span class="diseased">Disease Treatment</span></p>
+            {% endif %}
+          </div>
+          <h5 class="disease-name">{{disease[index]}}</h5>
+          <p class="product-name">{{supplement_name[index]}}</p>
+          <a href="{{buy[index]}}" target="_blank" class="btn-buy">
+            <i class="fas fa-shopping-cart"></i> Buy Now
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endif %} {% endfor %}
+  </div>
+</div>
+
+<!-- Additional CSS for this page -->
+<style>
+  :root {
+    --primary-color: #2c6e49;
+    --secondary-color: #4c956c;
+    --accent-color: #fefee3;
+    --text-color: #233d4d;
+    --light-bg: #f8f9fa;
+    --healthy-color: #2c6e49;
+    --diseased-color: #d62828;
+  }
+
+  .hero-section {
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .hero-title {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-weight: 400;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .supplement-card {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .supplement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .supplement-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 2;
+  }
+
+  .badge-fertilizer,
+  .badge-supplement {
+    padding: 8px 12px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .badge-fertilizer {
+    background-color: var(--healthy-color);
+  }
+
+  .badge-supplement {
+    background-color: var(--diseased-color);
+  }
+
+  .badge-fertilizer i,
+  .badge-supplement i {
+    margin-right: 5px;
+  }
+
+  .supplement-img {
+    height: 220px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    background-color: #f9f9f9;
+  }
+
+  .supplement-img img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+  }
+
+  .supplement-card:hover .supplement-img img {
+    transform: scale(1.05);
+  }
+
+  .supplement-info {
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  .condition {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+  }
+
+  .healthy {
+    color: var(--healthy-color);
+    font-weight: 600;
+  }
+
+  .diseased {
+    color: var(--diseased-color);
+    font-weight: 600;
+  }
+
+  .disease-name {
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+
+  .product-name {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .btn-buy {
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-buy:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    color: white;
+  }
+
+  .btn-buy i {
+    margin-right: 5px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 991px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .supplement-img {
+      height: 180px;
+    }
+
+    .disease-name {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-section {
+      padding: 2rem 0;
+    }
+
+    .supplement-card {
+      margin-bottom: 15px;
+    }
+
+    .supplement-img {
+      height: 160px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .hero-title {
+      font-size: 1.5rem;
+    }
+
+    .supplement-info {
+      padding: 1rem;
+    }
+  }
+</style>
+{% endblock body %}
