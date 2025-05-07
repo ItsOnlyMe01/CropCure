@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: crop-cure-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn main_app:app
+    envVars:
+      - key: PYTHONPATH
+        value: /opt/render/project/src
+      - key: PYTHONUNBUFFERED
+        value: 1
