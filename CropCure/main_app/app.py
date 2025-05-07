@@ -1,70 +1,66 @@
 import os
+import sys
+import torch
+import pandas as pd
+import numpy as np
 import requests
 from flask import Flask, redirect, render_template, request
 from PIL import Image
 import torchvision.transforms.functional as TF
-# Fix the import by using a relative import or adjusting the Python path
+
+# Try importing CNN module properly
 try:
     import CNN
 except ModuleNotFoundError:
-    # Try alternative import approaches
-    import sys
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
     try:
         import CNN
     except ModuleNotFoundError:
-        # If still not found, try from parent directory
         sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         try:
             from CropCure import CNN
         except ModuleNotFoundError:
             print("ERROR: Could not import CNN module. Please check file structure.")
-            # Create a placeholder CNN class for debugging
             class CNN:
                 def __init__(self, num_classes):
                     self.num_classes = num_classes
                 def __call__(self, x):
-                    import numpy as np
                     return np.zeros((1, self.num_classes))
                 def eval(self):
                     pass
                 def load_state_dict(self, state_dict):
                     pass
 
-import numpy as np
-import torch
-import pandas as pd
+# For downloading from Google Drive reliably
+import gdown
 
 # Google Drive file ID for the model
-file_id = '1En73N317hTlvJpZDa-FqsMsIMskzU70h'  # Updated file ID from the new link
+file_id = '1En73N317hTlvJpZDa-FqsMsIMskzU70h'
 file_name = 'datasetofdisease.pt'
-file_url = f'https://drive.google.com/uc?export=download&id={file_id}'
 
-# Function to download the model file
+# Function to download the model file using gdown
 def download_model():
     if not os.path.exists(file_name):
         print(f"{file_name} not found. Downloading...")
-        response = requests.get(file_url, stream=True)
-        with open(file_name, 'wb') as f:
-            for chunk in response.iter_content(chunk_size=8192):
-                if chunk:
-                    f.write(chunk)
+        url = f'https://drive.google.com/uc?id={file_id}'
+        gdown.download(url, file_name, quiet=False)
         print("Download complete.")
     else:
         print(f"{file_name} already exists.")
 
-# Download the model file if not present
+# Download the model if needed
 download_model()
 
-# Load the model after downloading it
-model = CNN.CNN(39)    
-model.load_state_dict(torch.load(file_name))
+# Load the model
+model = CNN.CNN(39)
+model.load_state_dict(torch.load(file_name, map_location=torch.device('cpu')))
 model.eval()
 
-# Read the disease and supplement info
+# Load disease and supplement info
 disease_info = pd.read_csv('disease_info.csv', encoding='cp1252')
 supplement_info = pd.read_csv('supplement_info.csv', encoding='cp1252')
 
+# Prediction function
 def prediction(image_path):
     image = Image.open(image_path)
     image = image.resize((224, 224))
@@ -75,7 +71,7 @@ def prediction(image_path):
     index = np.argmax(output)
     return index
 
-# Flask app setup
+# Flask app
 app = Flask(__name__)
 
 @app.route('/')
@@ -97,7 +93,6 @@ def submit():
         filename = image.filename
         file_path = os.path.join('static/uploads', filename)
         image.save(file_path)
-        print(file_path)
         pred = prediction(file_path)
         title = disease_info['disease_name'][pred]
         description = disease_info['description'][pred]
